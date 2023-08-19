@@ -30,7 +30,7 @@
     Copyright         = '(c) Marius Storhaug. All rights reserved.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'A PowerShell module for managing the PATH environment variable.'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
