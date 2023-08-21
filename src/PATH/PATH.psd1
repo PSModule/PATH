@@ -54,7 +54,7 @@
     RequiredModules      = @(
         @{
             ModuleName    = 'Utilities'
-            ModuleVersion = '0.0.8'
+            ModuleVersion = '0.0'
         }
     )
 
