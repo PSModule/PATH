@@ -1,4 +1,5 @@
 ﻿#Requires -Version 7.0
+#Requires -Modules @{ModuleName='Utilities';ModuleVersion='0.0'}
 
 function Get-EnvironmentPath {
     <#
@@ -99,7 +100,7 @@ function Repair-EnvironmentPath {
             [System.EnvironmentVariableTarget]::User
         } else {
             [System.EnvironmentVariableTarget]::Machine
-            if (-not (Test-Administrator)) {
+            if (-not (IsAdmin)) {
                 throw "Administrator rights are required to modify machine PATH. Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command."
             }
         }
@@ -212,7 +213,7 @@ function Add-EnvironmentPath {
             [System.EnvironmentVariableTarget]::User
         } else {
             [System.EnvironmentVariableTarget]::Machine
-            if (-not (Test-Administrator)) {
+            if (-not (IsAdmin)) {
                 throw "Administrator rights are required to modify machine PATH. Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command."
             }
         }
@@ -340,7 +341,7 @@ function Remove-EnvironmentPath {
             [System.EnvironmentVariableTarget]::User
         } else {
             [System.EnvironmentVariableTarget]::Machine
-            if (-not (Test-Administrator)) {
+            if (-not (IsAdmin)) {
                 throw "Administrator rights are required to modify machine PATH. Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command."
             }
         }
@@ -364,34 +365,5 @@ function Remove-EnvironmentPath {
     }
 }
 
-function Test-Role {
-    <#
-    .SYNOPSIS
-    Test if the current context is running as a specified role.
+Export-ModuleMember -Function '*' -Alias '*' -Variable '*' -Alias '*'
 
-    .DESCRIPTION
-    Test if the current context is running as a specified role.
-
-    .EXAMPLE
-    Test-Role -Role Administrator
-
-    Test if the current context is running as an Administrator.
-
-    .EXAMPLE
-    Test-Role -Role User
-
-    Test if the current context is running as a User.
-    #>
-    [OutputType([Boolean])]
-    [CmdletBinding()]
-    param(
-        [Security.Principal.WindowsBuiltInRole] $Role = 'Administrator'
-    )
-
-    Write-Verbose "Test Role - [$Role]"
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent()
-    $principal = New-Object Security.Principal.WindowsPrincipal($user)
-    $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::$Role)
-    Write-Verbose "Test Role - [$Role] - [$isAdmin]"
-    return $isAdmin
-}
