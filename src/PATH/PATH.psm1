@@ -1,7 +1,4 @@
-﻿#Requires -Version 7.0
-#Requires -Modules @{ModuleName='Utilities';ModuleVersion='0.0'}
-
-function Get-EnvironmentPath {
+﻿function Get-EnvironmentPath {
     <#
     .SYNOPSIS
     Get the PATH environment variable.
