@@ -51,7 +51,12 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    RequiredModules      = @('Utilities')
+    RequiredModules      = @(
+        @{
+            ModuleName    = 'Utilities'
+            ModuleVersion = '0.0'
+        }
+    )
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()
@@ -113,7 +118,7 @@
             # Prerelease = ''
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-            # RequireLicenseAcceptance = $false
+            RequireLicenseAcceptance = $false
 
             # External dependent modules of this module
             # ExternalModuleDependencies = @()
