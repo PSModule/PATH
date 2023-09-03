@@ -362,5 +362,4 @@ function Remove-EnvironmentPath {
     }
 }
 
-Export-ModuleMember -Function '*' -Alias '*' -Variable '*' -Alias '*'
-
+Export-ModuleMember -Function '*' -Cmdlet '*' -Variable '*' -Alias '*'
