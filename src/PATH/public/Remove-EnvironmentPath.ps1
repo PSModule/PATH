@@ -1,4 +1,6 @@
-﻿function Remove-EnvironmentPath {
+﻿#Requires -Module Utilities
+
+function Remove-EnvironmentPath {
     <#
     .SYNOPSIS
     Remove a path from the PATH environment variable.

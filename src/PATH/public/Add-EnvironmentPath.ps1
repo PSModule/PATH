@@ -1,4 +1,6 @@
-﻿function Add-EnvironmentPath {
+﻿#Requires -Module Utilities
+
+function Add-EnvironmentPath {
     <#
     .SYNOPSIS
     Add a path to the PATH environment variable.

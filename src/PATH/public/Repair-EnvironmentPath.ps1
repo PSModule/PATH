@@ -1,4 +1,6 @@
-﻿function Repair-EnvironmentPath {
+﻿#Requires -Module Utilities
+
+function Repair-EnvironmentPath {
     <#
     .SYNOPSIS
     Repair the PATH environment variable.
