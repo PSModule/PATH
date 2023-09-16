@@ -24,7 +24,7 @@ jobs:
         with:
           Verbose: true
 
-      - name: Publish Module
+      - name: Release Module
         uses: PSModule/Release-Module@main
         with:
           APIKey: ${{ secrets.APIKEY }}
