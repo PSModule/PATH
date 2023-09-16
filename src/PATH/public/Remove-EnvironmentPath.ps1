@@ -1,4 +1,4 @@
-﻿#Requires -Module Utilities
+﻿#Requires -Modules Utilities
 
 function Remove-EnvironmentPath {
     <#
