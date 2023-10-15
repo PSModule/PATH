@@ -96,7 +96,12 @@ function Remove-EnvironmentPath {
     }
 
     end {
-        $environmentPath = $environmentPath -join ';'
+        if ($IsWindows) {
+            $pathSeparator = ';'
+        } else {
+            $pathSeparator = ':'
+        }
+        $environmentPath = $environmentPath -join $pathSeparator
         [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
         Write-Verbose "Remove PATH - [$target] - Done"
     }

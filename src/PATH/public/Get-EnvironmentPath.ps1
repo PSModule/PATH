@@ -40,7 +40,12 @@
     if (-not $AsArray) {
         return $environmentPath
     }
-    $environmentPath = $environmentPath.Split(';')
+    if ($IsWindows) {
+        $pathSeparator = ';'
+    } else {
+        $pathSeparator = ':'
+    }
+    $environmentPath = $environmentPath.Split($pathSeparator)
     $environmentPath = $environmentPath | Sort-Object
 
     return $environmentPath

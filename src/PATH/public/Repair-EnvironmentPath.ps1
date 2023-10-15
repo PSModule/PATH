@@ -94,8 +94,13 @@ function Repair-EnvironmentPath {
     }
 
     end {
+        if ($IsWindows) {
+            $pathSeparator = ';'
+        } else {
+            $pathSeparator = ':'
+        }
         $repairedEnvironmentPaths = $repairedEnvironmentPaths | Sort-Object -Unique
-        $repairedEnvironmentPaths = $repairedEnvironmentPaths -join ';'
+        $repairedEnvironmentPaths = $repairedEnvironmentPaths -join $pathSeparator
 
         [System.Environment]::SetEnvironmentVariable('PATH', $repairedEnvironmentPaths, [System.EnvironmentVariableTarget]::$target)
         Write-Verbose "Repair PATH - [$target] - Done"
