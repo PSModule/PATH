@@ -6,33 +6,47 @@ on:
       - '*'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}
+
 jobs:
   Process-PSModule:
-    name: Process-PSModule
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    uses: PSModule/Actions/.github/workflows/Process-PSModule.yml@main
+    secrets: inherit
 
-      - name: Initialize-PSModule
-        uses: PSModule/Initialize-PSModule@main
-        with:
-          Verbose: true
+# on:
+#   push:
+#     branches:
+#       - '*'
+#   workflow_dispatch:
 
-      - name: Build-PSModule
-        uses: PSModule/Build-PSModule@main
-        with:
-          Verbose: true
+# jobs:
+#   Process-PSModule:
+#     name: Process-PSModule
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
 
-      - name: Test-PSModule
-        uses: PSModule/Test-PSModule@main
-        with:
-          Verbose: true
+#       - name: Initialize-PSModule
+#         uses: PSModule/Initialize-PSModule@main
+#         with:
+#           Verbose: true
 
-      - name: Release-PSModule
-        uses: PSModule/Release-PSModule@main
-        with:
-          APIKey: ${{ secrets.APIKEY }}
-          Verbose: true
-        env:
-          GH_TOKEN: ${{ github.token }} # Used for GitHub CLI authentication
+#       - name: Build-PSModule
+#         uses: PSModule/Build-PSModule@main
+#         with:
+#           Verbose: true
+
+#       - name: Test-PSModule
+#         uses: PSModule/Test-PSModule@main
+#         with:
+#           Verbose: true
+
+#       - name: Release-PSModule
+#         uses: PSModule/Release-PSModule@main
+#         with:
+#           APIKey: ${{ secrets.APIKEY }}
+#           Verbose: true
+#         env:
+#           GH_TOKEN: ${{ github.token }} # Used for GitHub CLI authentication
