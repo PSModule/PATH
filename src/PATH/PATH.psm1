@@ -23,8 +23,8 @@ Foreach ($Folder in $Folders) {
 $Param = @{
     Function = (Get-ChildItem -Path "$PSScriptRoot\public" -Include '*.ps1' -Recurse).BaseName
     Variable = '*'
-    Cmdlet   = '*'
-    Alias    = '*'
+    Cmdlet   = ''
+    Alias    = ''
 }
 
 Write-Verbose 'Exporting module members'
