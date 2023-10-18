@@ -1,10 +1,4 @@
 @{
-    # Author of this module
-    Author      = 'Marius Storhaug'
-
-    # Company or vendor of this module
-    CompanyName = 'Marius Storhaug'
-
     # Description of the functionality provided by this module
     Description = 'A PowerShell module for managing the PATH environment variable.'
 
@@ -17,20 +11,20 @@
             Tags       = 'PATH', 'Environment', 'PowerShell', 'Module'
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/MariusStorhaug/PATH/blob/main/LICENSE'
+            LicenseUri = 'https://github.com/PSModule/PATH/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/MariusStorhaug/PATH'
+            ProjectUri = 'https://github.com/PSModule/PATH'
 
             # A URL to an icon representing this module.
-            IconUri    = 'https://raw.githubusercontent.com/MariusStorhaug/PATH/main/icon/PowerShell_Core_6.0_icon.png'
+            IconUri    = 'https://raw.githubusercontent.com/PSModule/PATH/main/icon/PowerShell_Core_6.0_icon.png'
 
         } # End of PSData hashtable
 
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    HelpInfoURI = 'https://mariusstorhaug.github.io/PATH'
+    HelpInfoURI = 'https://PSModule.github.io/PATH'
 
 }
 
