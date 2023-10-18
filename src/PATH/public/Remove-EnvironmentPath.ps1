@@ -38,7 +38,7 @@ function Remove-EnvironmentPath {
 
     Remove all paths from the PATH environment variable for the current user that start with the Windows directory, Program Files directory or Program Files (x86) directory.
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         # The scope of the environment variable.
         [Parameter()]
@@ -102,7 +102,9 @@ function Remove-EnvironmentPath {
             $pathSeparator = ':'
         }
         $environmentPath = $environmentPath -join $pathSeparator
-        [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
+        if ($PSCmdlet.ShouldProcess($environmentPath, 'Remove')) {
+            [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
+        }
         Write-Verbose "Remove PATH - [$target] - Done"
     }
 }
