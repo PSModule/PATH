@@ -2,8 +2,6 @@ name: Process-PSModule
 
 on:
   push:
-    branches:
-      - '*'
   workflow_dispatch:
 
 concurrency:
