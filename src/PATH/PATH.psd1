@@ -1,9 +1,13 @@
 @{
-    # Description of the functionality provided by this module
-    Description = 'A PowerShell module for managing the PATH environment variable.'
+    # Version number of this module
+    ModuleVersion = '0.1.0'
 
-    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-    PrivateData = @{
+    # Description of the functionality provided by this module
+    Description   = 'A PowerShell module for managing the PATH environment variable.'
+
+    # Private data to pass to the module specified in RootModule/ModuleToProcess.
+    # This may also contain a PSData hashtable with additional module metadata used by PowerShell.
+    PrivateData   = @{
 
         PSData = @{
 
@@ -24,7 +28,7 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    HelpInfoURI = 'https://PSModule.github.io/PATH'
+    HelpInfoURI   = 'https://PSModule.github.io/PATH'
 
 }
 

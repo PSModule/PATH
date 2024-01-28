@@ -26,7 +26,8 @@ function Add-EnvironmentPath {
     .EXAMPLE
     Add-EnvironmentPath -Scope CurrentUser -Path 'C:\Program Files\Git\cmd', 'C:\Program Files\Git\bin' -Force
 
-    Add the paths 'C:\Program Files\Git\cmd' and 'C:\Program Files\Git\bin' to the PATH environment variable for the current user. Any invalid paths will be removed.
+    Add the paths 'C:\Program Files\Git\cmd' and 'C:\Program Files\Git\bin' to the PATH environment variable for the current user.
+    Any invalid paths will be removed.
 
     .EXAMPLE
     'C:\Program Files\Git\cmd', 'C:\Program Files\Git\bin' | Add-EnvironmentPath -Scope CurrentUser
@@ -63,7 +64,11 @@ function Add-EnvironmentPath {
         } else {
             [System.EnvironmentVariableTarget]::Machine
             if (-not (IsAdmin)) {
-                throw "Administrator rights are required to modify machine PATH. Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command."
+                $errorMessage = @'
+Administrator rights are required to modify machine PATH.
+Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command.
+'@
+                throw $errorMessage
             }
         }
         $environmentPath = Get-EnvironmentPath -Scope $Scope -AsArray

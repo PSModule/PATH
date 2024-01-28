@@ -52,7 +52,11 @@ function Repair-EnvironmentPath {
         } else {
             [System.EnvironmentVariableTarget]::Machine
             if (-not (IsAdmin)) {
-                throw "Administrator rights are required to modify machine PATH. Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command."
+                $errorMessage = @'
+Administrator rights are required to modify machine PATH.
+Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command.
+'@
+                throw $errorMessage
             }
         }
         $environmentPaths = Get-EnvironmentPath -Scope $Scope -AsArray

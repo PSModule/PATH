@@ -34,9 +34,13 @@ function Remove-EnvironmentPath {
     Remove all paths from the PATH environment variable for all users that start with the current user's profile path.
 
     .EXAMPLE
-    (Get-EnvironmentPath -Scope CurrentUser -AsArray) | where {$_ -like "$env:windir*" -or $_ -like "$env:ProgramFiles*" -or $_ -like "${env:ProgramFiles(x86)}*"} | Remove-EnvironmentPath -Scope CurrentUser -Verbose
+    (Get-EnvironmentPath -Scope CurrentUser -AsArray) |
+        where {$_ -like "$env:windir*" -or $_ -like "$env:ProgramFiles*" -or $_ -like "${env:ProgramFiles(x86)}*"} |
+        Remove-EnvironmentPath -Scope CurrentUser -Verbose
 
-    Remove all paths from the PATH environment variable for the current user that start with the Windows directory, Program Files directory or Program Files (x86) directory.
+    Remove all paths from the PATH environment variable for the current user that start with the Windows directory,
+    Program Files directory or Program Files (x86) directory.
+
     #>
     [CmdletBinding(SupportsShouldProcess)]
     param(
@@ -79,7 +83,11 @@ function Remove-EnvironmentPath {
         } else {
             [System.EnvironmentVariableTarget]::Machine
             if (-not (IsAdmin)) {
-                throw "Administrator rights are required to modify machine PATH. Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command."
+                $errorMessage = @'
+Administrator rights are required to modify machine PATH.
+Please run the command again with elevated rights (Run as Administrator) or provide '-Scope CurrentUser' to your command.
+'@
+                throw $errorMessage
             }
         }
         $environmentPath = Get-EnvironmentPath -Scope $Scope -AsArray
