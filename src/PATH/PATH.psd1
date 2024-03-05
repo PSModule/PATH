@@ -1,5 +1,5 @@
 ﻿@{
-    ModuleVersion = '0.1.0'
+    ModuleVersion = '0.0.1'
     Description   = 'A PowerShell module for managing the PATH environment variable.'
     HelpInfoURI   = 'https://PSModule.github.io/PATH'
     PrivateData   = @{
