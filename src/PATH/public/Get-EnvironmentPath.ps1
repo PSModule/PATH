@@ -40,7 +40,7 @@
     if (-not $AsArray) {
         return $environmentPath
     }
-    if ($IsWindows) {
+    if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
         $pathSeparator = ';'
     } else {
         $pathSeparator = ':'

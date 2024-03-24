@@ -98,7 +98,7 @@ Please run the command again with elevated rights (Run as Administrator) or prov
     }
 
     end {
-        if ($IsWindows) {
+        if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
             $pathSeparator = ';'
         } else {
             $pathSeparator = ':'
