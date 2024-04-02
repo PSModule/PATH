@@ -20,11 +20,11 @@ Describe 'PATH' {
 
     Context 'Function: Get-EnvironemntPath' {
         It 'Should not throw' {
-            { Get-EnvironmentPath } | Should -Not -Throw
+            { Write-Verbose (Get-EnvironmentPath) -Verbose } | Should -Not -Throw
         }
 
         It "Should not throw when using '-AsArray'" {
-            { Get-EnvironmentPath } | Should -Not -Throw
+            { Write-Verbose (Get-EnvironmentPath -AsArray) -Verbose } | Should -Not -Throw
         }
     }
 
