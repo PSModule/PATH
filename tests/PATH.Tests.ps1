@@ -20,11 +20,15 @@ Describe 'PATH' {
 
     Context 'Function: Get-EnvironemntPath' {
         It 'Should not throw' {
-            { Write-Verbose (Get-EnvironmentPath | Out-String) -Verbose } | Should -Not -Throw
+            $result = Get-EnvironmentPath
+            Write-Verbose ($result | Out-String) -Verbose
+            $result | Should -BeOfType [System.String]
         }
 
         It "Should not throw when using '-AsArray'" {
-            { Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose } | Should -Not -Throw
+            $result = Get-EnvironmentPath -AsArray
+            Write-Verbose ($result | Out-String) -Verbose
+            $result | Should -BeOfType [System.String[]]
         }
     }
 

@@ -106,6 +106,9 @@ Please run the command again with elevated rights (Run as Administrator) or prov
             $pathSeparator = ':'
         }
         $environmentPath = $environmentPath -join $pathSeparator
+        $environmentPath = $environmentPath.Trim($pathSeparator)
+        $environmentPath = $environmentPath + $pathSeparator
+
         if ($PSCmdlet.ShouldProcess($environmentPath, 'Remove')) {
             [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
         }

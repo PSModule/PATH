@@ -105,6 +105,8 @@ Please run the command again with elevated rights (Run as Administrator) or prov
         }
         $repairedEnvironmentPaths = $repairedEnvironmentPaths | Sort-Object -Unique
         $repairedEnvironmentPaths = $repairedEnvironmentPaths -join $pathSeparator
+        $repairedEnvironmentPaths = $repairedEnvironmentPaths.Trim($pathSeparator)
+        $repairedEnvironmentPaths = $repairedEnvironmentPaths + $pathSeparator
 
         [System.Environment]::SetEnvironmentVariable('PATH', $repairedEnvironmentPaths, [System.EnvironmentVariableTarget]::$target)
         Write-Verbose "Repair PATH - [$target] - Done"

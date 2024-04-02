@@ -110,12 +110,14 @@ Please run the command again with elevated rights (Run as Administrator) or prov
     }
 
     end {
-        if ($IsWindows) {
+        if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
             $pathSeparator = ';'
         } else {
             $pathSeparator = ':'
         }
         $environmentPath = $environmentPath -join $pathSeparator
+        $environmentPath = $environmentPath.Trim($pathSeparator)
+        $environmentPath = $environmentPath + $pathSeparator
 
         [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
         Write-Verbose "Add PATH - [$target] - Done"

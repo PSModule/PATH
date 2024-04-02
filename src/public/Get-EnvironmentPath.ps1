@@ -45,6 +45,7 @@
     } else {
         $pathSeparator = ':'
     }
+    $environmentPath = $environmentPath.Trim($pathSeparator)
     $environmentPath = $environmentPath.Split($pathSeparator)
     $environmentPath = $environmentPath | Sort-Object
 
