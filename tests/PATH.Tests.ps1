@@ -19,16 +19,32 @@ Describe 'PATH' {
     }
 
     Context 'Function: Get-EnvironemntPath' {
-        It 'Should not throw' {
-            $result = Get-EnvironmentPath
-            Write-Verbose ($result | Out-String) -Verbose
-            $result | Should -BeOfType [System.String]
+        Context 'CurrentUser' {
+            It 'Should not throw' {
+                $result = Get-EnvironmentPath
+                Write-Verbose ($result | Out-String) -Verbose
+                $result | Should -BeOfType [System.String]
+            }
+
+            It "Should not throw when using '-AsArray'" {
+                $result = Get-EnvironmentPath -AsArray
+                Write-Verbose ($result | Out-String) -Verbose
+                Should -ActualValue $result -BeOfType [System.Object[]]
+            }
         }
 
-        It "Should not throw when using '-AsArray'" {
-            $result = Get-EnvironmentPath -AsArray
-            Write-Verbose ($result | Out-String) -Verbose
-            Should -ActualValue $result -BeOfType [System.Object[]]
+        Context 'AllUsers' {
+            It 'Should not throw' {
+                $result = Get-EnvironmentPath -Scope 'AllUsers'
+                Write-Verbose ($result | Out-String) -Verbose
+                $result | Should -BeOfType [System.String]
+            }
+
+            It "Should not throw when using '-AsArray'" {
+                $result = Get-EnvironmentPath -Scope 'AllUsers' -AsArray
+                Write-Verbose ($result | Out-String) -Verbose
+                Should -ActualValue $result -BeOfType [System.Object[]]
+            }
         }
     }
 

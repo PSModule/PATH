@@ -119,7 +119,19 @@ Please run the command again with elevated rights (Run as Administrator) or prov
         $environmentPath = $environmentPath.Trim($pathSeparator)
         $environmentPath = $environmentPath + $pathSeparator
 
-        [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
+        if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
+            [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
+        } elseif ($IsLinux) {
+            $profilePath = $HOME + '/.profile'
+            $profileContent = Get-Content -Path $profilePath
+            $profileContent += "export PATH=$environmentPath"
+            Set-Content -Path $profilePath -Value $profileContent
+        } elseif ($IsMacOS) {
+            $profilePath = $HOME + '/.bash_profile'
+            $profileContent = Get-Content -Path $profilePath
+            $profileContent += "export PATH=$environmentPath"
+            Set-Content -Path $profilePath -Value $profileContent
+        }
         Write-Verbose "Add PATH - [$target] - Done"
     }
 }
