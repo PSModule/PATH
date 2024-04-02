@@ -57,7 +57,7 @@ function Add-EnvironmentPath {
     )
 
     begin {
-        $separatorChar = [IO.Path]::DirectorySeparatorChar
+        $separatorChar = [System.IO.Path]::DirectorySeparatorChar
 
         $target = if ($Scope -eq 'CurrentUser') {
             [System.EnvironmentVariableTarget]::User
@@ -110,28 +110,12 @@ Please run the command again with elevated rights (Run as Administrator) or prov
     }
 
     end {
-        if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
-            $pathSeparator = ';'
-        } else {
-            $pathSeparator = ':'
-        }
+        $pathSeparator = ';'
         $environmentPath = $environmentPath -join $pathSeparator
         $environmentPath = $environmentPath.Trim($pathSeparator)
         $environmentPath = $environmentPath + $pathSeparator
 
-        if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
-            [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
-        } elseif ($IsLinux) {
-            $profilePath = $HOME + '/.profile'
-            $profileContent = Get-Content -Path $profilePath
-            $profileContent += "export PATH=$environmentPath"
-            Set-Content -Path $profilePath -Value $profileContent
-        } elseif ($IsMacOS) {
-            $profilePath = $HOME + '/.bash_profile'
-            $profileContent = Get-Content -Path $profilePath
-            $profileContent += "export PATH=$environmentPath"
-            Set-Content -Path $profilePath -Value $profileContent
-        }
+        [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
         Write-Verbose "Add PATH - [$target] - Done"
     }
 }
