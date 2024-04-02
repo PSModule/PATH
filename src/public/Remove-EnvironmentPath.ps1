@@ -61,7 +61,11 @@ function Remove-EnvironmentPath {
             HelpMessage                     = 'Name of the font to uninstall.'
             ValueFromPipeline               = $true
             ValueFromPipelineByPropertyName = $true
-            ValidateSet                     = Get-EnvironmentPath -Scope $Scope -AsArray
+            ValidateSet                     = if ([string]::IsNullOrEmpty($Scope)) {
+                Get-EnvironmentPath -Scope 'CurrentUser' -AsArray
+            } else {
+                Get-EnvironmentPath -Scope $Scope -AsArray
+            }
             DynamicParamDictionary          = $DynamicParamDictionary
         }
         New-DynamicParam @dynPath
