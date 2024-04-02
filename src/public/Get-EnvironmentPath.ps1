@@ -40,11 +40,8 @@
     if (-not $AsArray) {
         return $environmentPath
     }
-    if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
-        $pathSeparator = ';'
-    } else {
-        $pathSeparator = ':'
-    }
+    $pathSeparator = ';'
+    $environmentPath = $environmentPath.Trim($pathSeparator)
     $environmentPath = $environmentPath.Split($pathSeparator)
     $environmentPath = $environmentPath | Sort-Object
 

@@ -57,7 +57,7 @@ function Add-EnvironmentPath {
     )
 
     begin {
-        $separatorChar = [IO.Path]::DirectorySeparatorChar
+        $separatorChar = [System.IO.Path]::DirectorySeparatorChar
 
         $target = if ($Scope -eq 'CurrentUser') {
             [System.EnvironmentVariableTarget]::User
@@ -110,12 +110,10 @@ Please run the command again with elevated rights (Run as Administrator) or prov
     }
 
     end {
-        if ($IsWindows) {
-            $pathSeparator = ';'
-        } else {
-            $pathSeparator = ':'
-        }
+        $pathSeparator = ';'
         $environmentPath = $environmentPath -join $pathSeparator
+        $environmentPath = $environmentPath.Trim($pathSeparator)
+        $environmentPath = $environmentPath + $pathSeparator
 
         [System.Environment]::SetEnvironmentVariable('PATH', $environmentPath, [System.EnvironmentVariableTarget]::$target)
         Write-Verbose "Add PATH - [$target] - Done"
