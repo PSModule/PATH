@@ -32,6 +32,7 @@ Describe 'PATH' {
         It 'Should not throw' {
             {
                 Add-EnvironmentPath -Path $HOME -Verbose
+                Write-Verbose (Get-EnvironmentPath | Out-String) -Verbose
                 Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose
             } | Should -Not -Throw
         }
@@ -41,6 +42,7 @@ Describe 'PATH' {
         It 'Should not throw' {
             {
                 Repair-EnvironmentPath -Verbose
+                Write-Verbose (Get-EnvironmentPath | Out-String) -Verbose
                 Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose
             } | Should -Not -Throw
         }
@@ -50,6 +52,7 @@ Describe 'PATH' {
         It 'Should not throw' {
             {
                 Remove-EnvironmentPath -Path $HOME -Verbose
+                Write-Verbose (Get-EnvironmentPath | Out-String) -Verbose
                 Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose
             } | Should -Not -Throw
         }
