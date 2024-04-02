@@ -1,4 +1,4 @@
-﻿#Requires -Modules Admin
+﻿#Requires -Modules Admin, DynamicParams
 
 function Remove-EnvironmentPath {
     <#
@@ -51,30 +51,23 @@ function Remove-EnvironmentPath {
     )
 
     DynamicParam {
-        $runtimeDefinedParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-        $attributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+        $DynamicParamDictionary = New-DynamicParamDictionary
 
-        $parameterName = 'Path'
-        $parameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-        $parameterAttribute.Mandatory = $true
-        $parameterAttribute.Position = 1
-        $parameterAttribute.HelpMessage = 'Name of the font to uninstall.'
-        $parameterAttribute.ValueFromPipeline = $true
-        $parameterAttribute.ValueFromPipelineByPropertyName = $true
-        $attributeCollection.Add($parameterAttribute)
+        $dynPath = @{
+            Name                            = 'Path'
+            Alias                           = 'FullName'
+            Type                            = [string[]]
+            Mandatory                       = $true
+            Position                        = 1
+            HelpMessage                     = 'Name of the font to uninstall.'
+            ValueFromPipeline               = $true
+            ValueFromPipelineByPropertyName = $true
+            ValidateSet                     = Get-EnvironmentPath -Scope $Scope -AsArray
+            DynamicParamDictionary          = $DynamicParamDictionary
+        }
+        New-DynamicParam @dynPath
 
-        $parameterValidateSet = Get-EnvironmentPath -Scope $Scope -AsArray
-        $validateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($parameterValidateSet)
-        $attributeCollection.Add($validateSetAttribute)
-
-        # Adding a parameter alias
-        $parameterAlias = 'FullName'
-        $aliasAttribute = New-Object System.Management.Automation.AliasAttribute -ArgumentList $parameterAlias
-        $attributeCollection.Add($aliasAttribute)
-
-        $runtimeDefinedParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($parameterName, [string[]], $attributeCollection)
-        $runtimeDefinedParameterDictionary.Add($parameterName, $runtimeDefinedParameter)
-        return $runtimeDefinedParameterDictionary
+        return $DynamicParamDictionary
     }
 
     begin {
