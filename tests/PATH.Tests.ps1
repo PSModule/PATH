@@ -28,7 +28,7 @@ Describe 'PATH' {
         It "Should not throw when using '-AsArray'" {
             $result = Get-EnvironmentPath -AsArray
             Write-Verbose ($result | Out-String) -Verbose
-            $result | Should -BeOfType [System.String[]]
+            Should -ActualValue $result -BeOfType [System.String[]]
         }
     }
 
