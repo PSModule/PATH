@@ -20,29 +20,38 @@ Describe 'PATH' {
 
     Context 'Function: Get-EnvironemntPath' {
         It 'Should not throw' {
-            { Write-Verbose (Get-EnvironmentPath) -Verbose } | Should -Not -Throw
+            { Write-Verbose (Get-EnvironmentPath | Out-String) -Verbose } | Should -Not -Throw
         }
 
         It "Should not throw when using '-AsArray'" {
-            { Write-Verbose (Get-EnvironmentPath -AsArray) -Verbose } | Should -Not -Throw
+            { Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose } | Should -Not -Throw
         }
     }
 
     Context 'Function: Add-EnvironmentPath' {
         It 'Should not throw' {
-            { Add-EnvironmentPath -Path $HOME -Verbose } | Should -Not -Throw
+            {
+                Add-EnvironmentPath -Path $HOME -Verbose
+                Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose
+            } | Should -Not -Throw
         }
     }
 
     Context 'Function: Repair-EnvironmentPath' {
         It 'Should not throw' {
-            { Repair-EnvironmentPath -Verbose } | Should -Not -Throw
+            {
+                Repair-EnvironmentPath -Verbose
+                Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose
+            } | Should -Not -Throw
         }
     }
 
     Context 'Function: Remove-EnvironmentPath' {
         It 'Should not throw' {
-            { Remove-EnvironmentPath -Path $HOME -Verbose } | Should -Not -Throw
+            {
+                Remove-EnvironmentPath -Path $HOME -Verbose
+                Write-Verbose (Get-EnvironmentPath -AsArray | Out-String) -Verbose
+            } | Should -Not -Throw
         }
     }
 }
