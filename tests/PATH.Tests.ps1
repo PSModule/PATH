@@ -32,17 +32,17 @@ Describe 'PATH' {
         }
     }
 
-    Context 'Function: Remove-EnvironmentPath' {
-        It 'Should not throw' {
-            Write-Verbose (Remove-EnvironmentPath -Path $HOME | Out-String) -Verbose
-            { Remove-EnvironmentPath -Path $HOME } | Should -Not -Throw
-        }
-    }
-
     Context 'Function: Repair-EnvironmentPath' {
         It 'Should not throw' {
             Write-Verbose (Repair-EnvironmentPath | Out-String) -Verbose
             { Repair-EnvironmentPath } | Should -Not -Throw
+        }
+    }
+
+    Context 'Function: Remove-EnvironmentPath' {
+        It 'Should not throw' {
+            Write-Verbose (Remove-EnvironmentPath -Path $HOME | Out-String) -Verbose
+            { Remove-EnvironmentPath -Path $HOME } | Should -Not -Throw
         }
     }
 }

@@ -58,7 +58,6 @@ function Remove-EnvironmentPath {
             Alias                           = 'FullName'
             Type                            = [string[]]
             Mandatory                       = $true
-            Position                        = 1
             HelpMessage                     = 'Name of the font to uninstall.'
             ValueFromPipeline               = $true
             ValueFromPipelineByPropertyName = $true
