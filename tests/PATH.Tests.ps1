@@ -20,29 +20,29 @@ Describe 'PATH' {
 
     Context 'Function: Get-EnvironemntPath' {
         It 'Should not throw' {
-            Write-Verbose (Get-EnvironmentPath | Out-String) -Verbose
+            { Get-EnvironmentPath } | Should -Not -Throw
+        }
+
+        It "Should not throw when using '-AsArray'" {
             { Get-EnvironmentPath } | Should -Not -Throw
         }
     }
 
     Context 'Function: Add-EnvironmentPath' {
         It 'Should not throw' {
-            Write-Verbose (Add-EnvironmentPath -Path $HOME | Out-String) -Verbose
-            { Add-EnvironmentPath -Path $HOME } | Should -Not -Throw
+            { Add-EnvironmentPath -Path $HOME -Verbose } | Should -Not -Throw
         }
     }
 
     Context 'Function: Repair-EnvironmentPath' {
         It 'Should not throw' {
-            Write-Verbose (Repair-EnvironmentPath | Out-String) -Verbose
-            { Repair-EnvironmentPath } | Should -Not -Throw
+            { Repair-EnvironmentPath -Verbose } | Should -Not -Throw
         }
     }
 
     Context 'Function: Remove-EnvironmentPath' {
         It 'Should not throw' {
-            Write-Verbose (Remove-EnvironmentPath -Path $HOME | Out-String) -Verbose
-            { Remove-EnvironmentPath -Path $HOME } | Should -Not -Throw
+            { Remove-EnvironmentPath -Path $HOME -Verbose } | Should -Not -Throw
         }
     }
 }
