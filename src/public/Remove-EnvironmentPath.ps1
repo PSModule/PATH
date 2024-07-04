@@ -29,14 +29,14 @@ function Remove-EnvironmentPath {
     Remove the paths 'C:\Program Files\Git\cmd' and 'C:\Program Files\Git\bin' from the PATH environment variable for the current user.
 
     .EXAMPLE
-    (Get-EnvironmentPath -Scope AllUsers -AsArray) | where {$_ -like "$env:USERPROFILE*"} | Remove-EnvironmentPath -Scope AllUsers -Verbose
+    (Get-EnvironmentPath -Scope AllUsers -AsArray) | where {$_ -like "$env:USERPROFILE*"} | Remove-EnvironmentPath -Scope AllUsers
 
     Remove all paths from the PATH environment variable for all users that start with the current user's profile path.
 
     .EXAMPLE
     (Get-EnvironmentPath -Scope CurrentUser -AsArray) |
         where {$_ -like "$env:windir*" -or $_ -like "$env:ProgramFiles*" -or $_ -like "${env:ProgramFiles(x86)}*"} |
-        Remove-EnvironmentPath -Scope CurrentUser -Verbose
+        Remove-EnvironmentPath -Scope CurrentUser
 
     Remove all paths from the PATH environment variable for the current user that start with the Windows directory,
     Program Files directory or Program Files (x86) directory.
@@ -50,7 +50,7 @@ function Remove-EnvironmentPath {
         [string] $Scope = 'CurrentUser'
     )
 
-    DynamicParam {
+    dynamicparam {
         $DynamicParamDictionary = New-DynamicParamDictionary
 
         $dynPath = @{
