@@ -99,7 +99,7 @@ Please run the command again with elevated rights (Run as Administrator) or prov
 
     end {
 
-        $pathSeparator = ';'
+        $pathSeparator = [System.IO.Path]::PathSeparator
         $repairedEnvironmentPaths = $repairedEnvironmentPaths | Sort-Object -Unique
         $repairedEnvironmentPaths = $repairedEnvironmentPaths -join $pathSeparator
         $repairedEnvironmentPaths = $repairedEnvironmentPaths.Trim($pathSeparator)
