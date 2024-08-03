@@ -40,7 +40,7 @@
     if (-not $AsArray) {
         return $environmentPath
     }
-    $pathSeparator = ';'
+    $pathSeparator = [System.IO.Path]::PathSeparator
     $environmentPath = $environmentPath.Trim($pathSeparator)
     $environmentPath = $environmentPath.Split($pathSeparator)
     $environmentPath = $environmentPath | Sort-Object

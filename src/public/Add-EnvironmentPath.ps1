@@ -110,7 +110,7 @@ Please run the command again with elevated rights (Run as Administrator) or prov
     }
 
     end {
-        $pathSeparator = ';'
+        $pathSeparator = [System.IO.Path]::PathSeparator
         $environmentPath = $environmentPath -join $pathSeparator
         $environmentPath = $environmentPath.Trim($pathSeparator)
         $environmentPath = $environmentPath + $pathSeparator
