@@ -1,4 +1,23 @@
 ﻿function Add-EnvPath {
+    <#
+        .SYNOPSIS
+        Adds a path to the PATH environment variable.
+
+        .DESCRIPTION
+        Adds a path to the PATH environment variable for the current session and optionally for the machine or user.
+
+        .EXAMPLE
+        Add-EnvPath -Path 'C:\Program Files\Git\cmd'
+
+        Adds 'C:\Program Files\Git\cmd' to the PATH environment variable for the current session.
+
+        .EXAMPLE
+        Add-EnvPath -Path 'C:\Program Files\Git\cmd' -Container Machine
+
+        Adds 'C:\Program Files\Git\cmd' to the PATH environment variable for the machine.
+
+    #>
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
         [string] $Path,
